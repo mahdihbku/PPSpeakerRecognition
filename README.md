@@ -2,6 +2,7 @@
 P Practical Privacy-Preserving Speaker Recognition System
 ## Installation
 Requires [Kaldi](https://github.com/kaldi-asr/kaldi)
+
 In egs/voxceleb/pp :
 ```bash
 swig -python ec_elgamal.i
