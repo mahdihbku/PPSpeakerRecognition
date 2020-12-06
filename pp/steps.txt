@@ -1,0 +1,71 @@
+to export:
+egs/voxceleb/biggest_files_count/*
+src/privacy_code/*
+src/Makefile
+
+to rerun the evaluation test:
+root@mahdi-X550LC:/home/mahdi/Downloads/kaldi-master/egs/voxceleb/v2# ./run_eval_2.sh
+
+Updated/added files:
+egs/voxceleb/biggest_files_count/generate_normalized_xmeans.sh
+egs/voxceleb/biggest_files_count/generate_wav.pl
+egs/voxceleb/biggest_files_count/path.sh
+egs/voxceleb/biggest_files_count/compare_one_file_to_db.sh
+egs/voxceleb/biggest_files_count/sim.sh
+egs/voxceleb/biggest_files_count/results/*
+egs/voxceleb/biggest_files_count/server.py
+egs/voxceleb/biggest_files_count/client.py
+egs/voxceleb/biggest_files_count/utils.py
+egs/voxceleb/biggest_files_count/client_cmd.sh
+egs/voxceleb/biggest_files_count/server_cmd.sh
+egs/voxceleb/biggest_files_count/ec_elgamal.c
+egs/voxceleb/biggest_files_count/ec_elgamal.i
+egs/voxceleb/biggest_files_count/setup.py
+egs/voxceleb/biggest_files_count/sim2.sh
+egs/voxceleb/biggest_files_count/generate_client_files.sh
+egs/voxceleb/biggest_files_count/generate_encrypted_db.sh
+egs/voxceleb/biggest_files_count/extract_y.sh
+src/privacy_code/lda_transform_xvectors.cc
+src/privacy_code/ivector-plda-scoring.cc
+src/privacy_code/compare_one_file_to_db.cc
+src/privacy_code/plda_normalized.h
+src/privacy_code/plda_normalized.cc
+src/privacy_code/ec_elgamal.cc
+src/privacy_code/ec_elgamal.h
+src/privacy_code/generate_client_files.cc
+src/privacy_code/sim.cc
+src/privacy_code/Makefile
+src/privacy_code/generate_client_files.cc
+src/privacy_code/generate_encrypted_db.cc
+src/Makefile
+
+not changed:
+src/ivectorbin/ivector-plda-scoring.cc
+src/ivector/plda.h
+src/ivector/plda.cc
+
+compile src/privacy_code/ files:
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/src$ make -j4
+
+cmds to generate the heatmap plot:
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count/small_db_metadata$ cd ..; ./generate_normalized_xmeans.sh; cd small_db_metadata
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count/small_db_metadata$ ./../../../../src/bin/copy-vector ark:normalized_xmeans.ark ark,t:normalized_xmeans.txt
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count/small_db_metadata$ cp normalized_xmeans.txt ../results/heatmap/
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count/small_db_metadata$ cd ../results/heatmap; python facesRepsHist.py; gnuplot heatmap_plot.gp 
+
+cmds to generate one2many plots:
+#set db_files, db_metadata in generate_normalized_xmeans.sh
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count$ ./generate_normalized_xmeans.sh
+#set db_metadata, one_file_metadata, output_file in compare_one_file_to_db.sh
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count$ ./compare_one_file_to_db.sh 
+#results in scores.txt (or output_file)
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count$ cp scores.txt results/one2many/id10018/scores_id10018_id10020.txt	//check file name...
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count$ cd results/one2many/id10018; gnuplot plot_id10018_id10020.gp
+
+cmds to run sim:
+#set db_metadata, one_file_metadata in sim.sh
+mahdi@mahdi-X550LC:~/Downloads/kaldi-master/egs/voxceleb/biggest_files_count$ ./sim.sh 
+
+to change psi_inversed.data:
+root@mahdi-X550LC:/home/mahdi/Downloads/kaldi-master/egs/voxceleb/v2# cp psi_inversed.data ../biggest_files_count/xvector_nnet_1a/
+
