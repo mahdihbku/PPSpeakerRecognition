@@ -6,6 +6,7 @@ Requires [Kaldi](https://github.com/kaldi-asr/kaldi)
 Required changes:
 - Copy the folder privacy_code/ into kaldi_dir/src/
 - Erase the Makefile in kaldi_dir/src/ with the new Makefile
+- Make kaldi_dir/src/
 - Copy the folder pp/ into kaldi_dir/egs/voxceleb/
 - cd kaldi_dir/egs/voxceleb/pp/
 
