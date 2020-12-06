@@ -1,11 +1,13 @@
 # PPSpeakerRecognition
-P Practical Privacy-Preserving Speaker Recognition System
+Practical Privacy-Preserving Speaker Recognition System
 ## Installation
 Requires [Kaldi](https://github.com/kaldi-asr/kaldi)
 
 Required changes:
-Markup :  * one
-          * two
+- Copy the folder privacy_code/ into kaldi_dir/src/
+- Erase the Makefile in kaldi_dir/src/ with the new Makefile
+- Copy the folder pp/ into kaldi_dir/egs/voxceleb/
+- cd kaldi_dir/egs/voxceleb/pp/
 
 In egs/voxceleb/pp :
 ```bash
@@ -18,10 +20,14 @@ python setup.py build_ext --inplace
 ## Usage
 Server:
 ```bash
-./server.py --suspectsDir suspectsDir/ --serverIP=127.0.0.1 --verbose --CPUs=16 --serverPort 8003
+server.py --verbose --db_folder db1000 --db_metadata db_metadata --server_port 1234 --cpus 16
+# OR
+./server_cmd.sh
 ```
 
 End device:
 ```bash
-./client.py --serverIP=127.0.0.1 --threshold=0.99 --serverPort=8003
+./client.py --verbose --wav_dir one_file_db --server_port 1234 --cpus 4 --wav one_file_db/wav/id10270/5r0dWxy17C8/00015.wav --dby_portion 1
+# OR
+./client_cmd.sh
 ```
