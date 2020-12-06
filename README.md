@@ -10,7 +10,7 @@ Required changes:
 - Copy the folder pp/ into kaldi_dir/egs/voxceleb/
 - cd kaldi_dir/egs/voxceleb/pp/
 
-In egs/voxceleb/pp :
+In kaldi_dir/egs/voxceleb/pp/ :
 ```bash
 swig -python ec_elgamal.i
 gcc -c ec_elgamal.c ec_elgamal_wrap.c -lcrypto -I/usr/include/python2.7 -fPIC
